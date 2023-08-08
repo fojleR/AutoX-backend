@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://frabbybics10:eywXLF8wg7fnEOur@cluster0.io7du6p.mongodb.net/").then(function(){
+mongoose.connect("mongodb+srv://frabbybics10:eywXLF8wg7fnEOur@cluster0.io7du6p.mongodb.net/AutoX").then(function(){
     console.log("Database is connect successfully.");
 }).catch(function(err){
     console.log(err);
@@ -21,6 +21,10 @@ if (process.env.NODE_ENV === "production") {
     response.sendFile(path.resolve(__dirname, "build", "index.html"));
   });
 }
+
+app.get("/", (req, res) => {
+  res.json({ status: "success" });
+});
 
 //----------------------------------- signUp && logIn ------------------
 const signUpSchema = new mongoose.Schema({
