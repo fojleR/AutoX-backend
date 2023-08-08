@@ -229,5 +229,5 @@ app.get('/store', async (req, res) => {
 
 
 app.listen(5000, function(){
-    console.log("The server is running on port 8000");
+    console.log("The server is running on port 5000");
 })
