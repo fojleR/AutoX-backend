@@ -2,19 +2,25 @@ const express = require("express");
 const mongoose = require("mongoose");
 const validator = require("validator");
 const cors = require("cors");
-
+require("dotenv").config();
+const path = require("path");
 
 const app = express();
-app.use(cors({
-  origin: ["http://localhost:3000/", "https://autox-web.render.com/"]
-}));
+app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/AutoX").then(function(){
+mongoose.connect("mongodb+srv://frabbybics10:eywXLF8wg7fnEOur@cluster0.io7du6p.mongodb.net/").then(function(){
     console.log("Database is connect successfully.");
 }).catch(function(err){
     console.log(err);
 });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.resolve(__dirname, "./build")));
+  app.get("*", function (request, response) {
+    response.sendFile(path.resolve(__dirname, "build", "index.html"));
+  });
+}
 
 //----------------------------------- signUp && logIn ------------------
 const signUpSchema = new mongoose.Schema({
