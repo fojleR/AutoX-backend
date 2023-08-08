@@ -9,22 +9,26 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://frabbybics10:eywXLF8wg7fnEOur@cluster0.io7du6p.mongodb.net/AutoX").then(function(){
+mongoose.connect("mongodb://127.0.0.1:27017/AutoX").then(function(){
     console.log("Database is connect successfully.");
 }).catch(function(err){
     console.log(err);
 });
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.resolve(__dirname, "./build")));
-  app.get("*", function (request, response) {
-    response.sendFile(path.resolve(__dirname, "build", "index.html"));
-  });
-}
-
 app.get("/", (req, res) => {
   res.json({ status: "success" });
 });
+
+// if (process.env.NODE_ENV !== "production") {
+//   app.use(express.static(path.resolve(__dirname, "./build")));
+  
+//   app.get("*", function (request, response) {
+//     console.log("hello")
+//     response.sendFile(path.resolve(__dirname, "build", "index.html"));
+//   });
+// }
+
+
 
 //----------------------------------- signUp && logIn ------------------
 const signUpSchema = new mongoose.Schema({
@@ -225,5 +229,5 @@ app.get('/store', async (req, res) => {
 
 
 app.listen(5000, function(){
-    console.log("The server is running on port 5000");
+    console.log("The server is running on port 8000");
 })
