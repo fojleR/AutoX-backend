@@ -15,9 +15,9 @@ mongoose.connect("mongodb+srv://frabbybics10:eywXLF8wg7fnEOur@cluster0.io7du6p.m
     console.log(err);
 });
 
-app.get("/", (req, res) => {
-  res.json({ status: "success" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ status: "success" });
+// });
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.resolve(__dirname, "./build")));
